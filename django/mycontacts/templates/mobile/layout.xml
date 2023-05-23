@@ -1,0 +1,17 @@
+<doc xmlns="https://hyperview.org/hyperview">
+    <screen>
+        <styles><!-- omitted for brevity --></styles>
+        <body style="" safe-area="true">
+        <header style="">
+            {% block header %}
+                <text style="">Contact.app</text>
+            {% endblock %}
+        </header>
+
+        <view style="">
+            {% block content %}{% endblock %}
+        </view>
+        </body>
+    </screen>
+</doc>
+
