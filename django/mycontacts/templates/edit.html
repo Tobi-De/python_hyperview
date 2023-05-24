@@ -2,34 +2,35 @@
 
 {% block content %}
 
-    <form action="/contacts/{{ contact.id }}/edit" method="post">
+    <form action="{% url 'contacts:edit' contact.pk %}" method="post">
         <fieldset>
             <legend>Contact Values</legend>
             <div class="table rows">
                 <p>
                     <label for="email">Email</label>
                     <input name="email" id="email" type="email"
-                           hx-get="/contacts/{{ contact.id }}/email" hx-target="next .error"
+                           hx-get="{% url 'contacts:validate_email' contact.pk %}"
+                           hx-target="next .error"
                            hx-trigger="change, keyup delay:200ms"
                            placeholder="Email" value="{{ contact.email }}">
-                    <span class="error">{{ contact.errors.email }}</span>
+                    <span class="error">{{ form.errors.email }}</span>
                 </p>
                 <p>
                     <label for="first_name">First Name</label>
                     <input name="first_name" id="first_name" type="text" placeholder="First Name"
-                           value="{{ contact.first }}">
-                    <span class="error">{{ contact.errorse.first }}</span>
+                           value="{{ contact.first_name }}">
+                    <span class="error">{{ form.errors.first_name }}</span>
                 </p>
                 <p>
                     <label for="last_name">Last Name</label>
                     <input name="last_name" id="last_name" type="text" placeholder="Last Name"
-                           value="{{ contact.last }}">
-                    <span class="error">{{ contact.errors.last }}</span>
+                           value="{{ contact.last_name }}">
+                    <span class="error">{{ form.errors.last_name }}</span>
                 </p>
                 <p>
                     <label for="phone">Phone</label>
                     <input name="phone" id="phone" type="text" placeholder="Phone" value="{{ contact.phone }}">
-                    <span class="error">{{ contact.errors.last }}</span>
+                    <span class="error">{{ form.errors.phone }}</span>
                 </p>
             </div>
             <button>Save</button>
@@ -37,7 +38,7 @@
     </form>
 
     <button id="delete-btn"
-            hx-delete="/contacts/{{ contact.id }}"
+            hx-delete="{% url 'contacts:delete' contact.pk %}"
             hx-push-url="true"
             hx-confirm="Are you sure you want to delete this contact?"
             hx-target="body">
@@ -45,7 +46,7 @@
     </button>
 
     <p>
-        <a href="/contacts">Back</a>
+        <a href="{% url 'contacts:index' %}">Back</a>
     </p>
 
 {% endblock %}

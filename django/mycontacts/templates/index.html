@@ -1,18 +1,20 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block content %}
 
     {% include 'archive_ui.html' %}
 
-    <form action="/contacts" method="get" class="tool-bar">
+
+    <form action="{% url "contacts:index" %}" method="get" class="tool-bar">
         <label for="search">Search Term</label>
-        <input id="search" type="search" name="q" value="{{ request.args.GET.q }}"
-               hx-get="/contacts"
+        <input id="search" type="search" name="q" value="{{ request.GET.q }}"
+               hx-get="{% url "contacts:index" %}"
                hx-trigger="search, keyup delay:200ms changed"
                hx-target="tbody"
                hx-push-url="true"
                hx-indicator="#spinner"/>
-        <img style="height: 20px" id="spinner" class="htmx-indicator" src="/static/img/spinning-circles.svg"/>
+        <img style="height: 20px" id="spinner" class="htmx-indicator" src="{% static 'img/spinning-circles.svg' %}"/>
         <input type="submit" value="Search"/>
     </form>
 
@@ -25,7 +27,7 @@
 
                 <button type="button" class="bad bg color border"
                         @click="confirm(`Delete ${selected.length} contacts?`) &&
-                    htmx.ajax('DELETE', '/contacts', { source: $root, target: document.body })"
+                    htmx.ajax('DELETE', '{% url 'contacts:delete_all' %}', { source: $root, target: document.body })"
                 >Delete
                 </button>
                 <hr aria-orientation="vertical">
@@ -47,16 +49,17 @@
             {% include 'rows.html' %}
             </tbody>
         </table>
-        <button hx-delete="/contacts"
+        <button hx-delete="{% url 'contacts:delete_all' %}"
                 hx-confirm="Are you sure you want to delete these contacts?"
-                hx-target="body">
+                hx-target="body"
+        >
             Delete Selected Contacts
         </button>
     </form>
     <p>
-        <a href="/contacts/new">Add Contact</a>
-        <span hx-get="/contacts/count" hx-trigger="revealed">
-          <img id="spinner" style="height: 20px" class="htmx-indicator" src="/static/img/spinning-circles.svg"/>
+        <a href="{% url 'contacts:new' %}">Add Contact</a>
+        <span hx-get="{% url 'contacts:count' %}" hx-trigger="revealed">
+          <img id="spinner" style="height: 20px" class="htmx-indicator" src="{% static 'img/spinning-circles.svg' %}"/>
         </span>
     </p>
 
