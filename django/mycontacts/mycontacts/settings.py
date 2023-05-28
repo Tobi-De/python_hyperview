@@ -116,17 +116,6 @@ STATICFILES_FINDERS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CORS_ALLOW_HEADERS = (
-    "accept",
-    "authorization",
-    "content-type",
-    "user-agent",
-    "x-csrftoken",
-    "x-requested-with",
-    "cache-control",
-    "expires",
-    "pragma",
-    "x-hyperview-dimensions",
-    "x-hyperview-version",
-)
+# You need this because hyperview works a bit like a web browser, it will check for CORS headers( https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS),
+# at least that why I observed during my testing, I don't know if this poses a security problem, If you know please let me know.
 CORS_ALLOW_ALL_ORIGINS = True

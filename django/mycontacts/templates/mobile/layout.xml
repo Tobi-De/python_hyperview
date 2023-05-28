@@ -1,17 +1,48 @@
 <doc xmlns="https://hyperview.org/hyperview">
-    <screen>
-        <styles><!-- omitted for brevity --></styles>
-        <body style="" safe-area="true">
-        <header style="">
-            {% block header %}
-                <text style="">Contact.app</text>
-            {% endblock %}
-        </header>
+  <screen>
+    <styles>
+    <style
+        id="Header"
+        alignItems="center"
+        backgroundColor="white"
+        borderBottomColor="#eee"
+        borderBottomWidth="1"
+        flexDirection="row"
+        paddingLeft="24"
+        paddingRight="24"
+        paddingBottom="16"
+      />
+        <style id="Body" backgroundColor="white" flex="1" />
+        <style
+        id="Item"
+        alignItems="center"
+        borderBottomColor="#eee"
+        borderBottomWidth="1"
+        flex="1"
+        flexDirection="row"
+        height="48"
+        justifyContent="space-between"
+        paddingLeft="24"
+        paddingRight="24"
+      />
+        <style
+        id="SearchInput"
+        paddingTop="30"
+      >
+      </style>
 
-        <view style="">
-            {% block content %}{% endblock %}
-        </view>
-        </body>
-    </screen>
+    </styles>
+    <body style="Body" safe-area="true">
+      <header style="Header">
+        {% block header %}
+          <text id="head" style="header-title">Contact.app</text>
+        {% endblock %}
+      </header>
+
+      <view style="Main">
+        {% block content %}{% endblock %}
+      </view>
+    </body>
+  </screen>
 </doc>
 

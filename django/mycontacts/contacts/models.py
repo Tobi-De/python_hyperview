@@ -31,4 +31,4 @@ class Contact(models.Model):
             | models.Q(last_name__icontains=text)
             | models.Q(phone__icontains=text)
             | models.Q(email__icontains=text)
-        )
+        ).order_by("email")

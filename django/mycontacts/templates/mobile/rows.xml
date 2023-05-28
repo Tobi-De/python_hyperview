@@ -1,6 +1,6 @@
-<items xmlns="https://hyperview.org/hyperview">
-    {% for contact in contacts %}
-        <item key="{{ contact.id }}" style="">
+<items xmlns="https://hyperview.org/hyperview" scroll="true">
+    {% for contact in page %}
+        <item key="{{ contact.id }}" style="Item">
             <text style="">
                 {% if contact.first %}
                     {{ contact.first }} {{ contact.last }}
@@ -12,5 +12,17 @@
             </text>
         </item>
     {% endfor %}
+    {% if page.has_next %}
+    <item key="load-more" id="load-more" style="load-more-item">
+      <behavior
+        trigger="visible"
+        action="replace"
+        target="load-more"
+        href="{% url 'contacts:mobile:index' %}?page={{ page.next_page_number }}"
+        verb="get"
+      />
+      <spinner />
+    </item>
+  {% endif %}
 </items>
 
