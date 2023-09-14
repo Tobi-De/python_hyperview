@@ -1,4 +1,4 @@
-# Python Hyperview
+# Python Hyperview (WIP)
 
 This project showcase how to build a mobile application using python web frameworks (currently only django is
 implemented) and hyperview. It is meant to be
